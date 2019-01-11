@@ -20,4 +20,3 @@
 <p>- Search messages.</p>
 <p>- Star to favorite / unfavorite channels.</p>
 <p>- Display progress bar.</p>
-<p><strong>* More features in future:</strong> sending direct messages between users, notifications for new messages, color picker to change app colors, displaying animation when users typing, adding emoji...</p>
