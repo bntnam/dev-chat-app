@@ -10,7 +10,7 @@ const App = ({ currentUser, currentChannel, userPosts }) => (
   <Grid columns="equal" className="app" style={{ background: '#eee' }}>
     <SidePanel key={currentUser && currentUser.uid} currentUser={currentUser} />
 
-    <Grid.Column style={{ marginLeft: 320 }}>
+    <Grid.Column style={{ marginLeft: 270 }}>
       <Messages
         key={currentChannel && currentChannel.id}
         currentChannel={currentChannel}
