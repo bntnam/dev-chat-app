@@ -161,7 +161,6 @@ class MessageForm extends Component {
           onChange={this.handleChange}
           value={message}
           style={{ marginBottom: '0.7em' }}
-          label={<Button icon={'add'} />}
           labelPosition="left"
           className={
             errors.some(error => error.message.includes('message'))
