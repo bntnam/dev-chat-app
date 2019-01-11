@@ -1,5 +1,5 @@
 <h1>DevChat - A React Slack clone chat app for developers.</h1>
-
+<img class="img-fluid mb-5" src="https://bntnam.github.io/img/portfolio/dev-chat.png" alt="">
 <h3>1. Introduction</h3>
 <p>- DevChat: A react slack clone web chat application for developers.</p>
 <p>- Website: <a href="https://dev-chat-c52e5.firebaseapp.com/" target="_blank">https://dev-chat-c52e5.firebaseapp.com</a></p>
