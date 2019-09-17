@@ -9,6 +9,8 @@ import { setUserPosts } from '../../actions';
 
 class Messages extends Component {
   state = {
+    privateChannel: this.props.isPrivateChannel,
+    privateMessagesRef: firebase.database().ref('privateMessages'),
     messagesRef: firebase.database().ref('messages'),
     messages: [],
     messagesLoading: true,
@@ -37,7 +39,8 @@ class Messages extends Component {
 
   addMessageListener = channelId => {
     let loadedMessages = [];
-    this.state.messagesRef.child(channelId).on('child_added', snap => {
+    const ref = this.getMessagesRef();
+    ref.child(channelId).on('child_added', snap => {
       loadedMessages.push(snap.val());
       this.setState({
         messages: loadedMessages,
@@ -59,29 +62,30 @@ class Messages extends Component {
           const prevStarred = channelIds.includes(channelId);
           this.setState({ isChannelStarred: prevStarred });
         }
-      })
-  }
+      });
+  };
 
   handleStar = () => {
-    this.setState(prevState => ({
-      isChannelStarred: !prevState.isChannelStarred
-    }), () => this.starChannel());
-  }
+    this.setState(
+      prevState => ({
+        isChannelStarred: !prevState.isChannelStarred
+      }),
+      () => this.starChannel()
+    );
+  };
 
   starChannel = () => {
     if (this.state.isChannelStarred) {
-      this.state.usersRef
-        .child(`${this.state.user.uid}/starred`)
-        .update({
-          [this.state.channel.id]: {
-            name: this.state.channel.name,
-            details: this.state.channel.details,
-            createdBy: {
-              name: this.state.channel.createdBy.name,
-              avatar: this.state.channel.createdBy.avatar
-            }
+      this.state.usersRef.child(`${this.state.user.uid}/starred`).update({
+        [this.state.channel.id]: {
+          name: this.state.channel.name,
+          details: this.state.channel.details,
+          createdBy: {
+            name: this.state.channel.createdBy.name,
+            avatar: this.state.channel.createdBy.avatar
           }
-        });
+        }
+      });
     } else {
       this.state.usersRef
         .child(`${this.state.user.uid}/starred`)
@@ -90,8 +94,13 @@ class Messages extends Component {
           if (err !== null) {
             console.error(err);
           }
-        })
+        });
     }
+  };
+
+  getMessagesRef = () => {
+    const { messagesRef, privateMessagesRef, privateChannel } = this.state;
+    return privateChannel ? privateMessagesRef : messagesRef;
   }
 
   handleSearchChange = e => {
@@ -140,12 +149,12 @@ class Messages extends Component {
         acc[message.user.name] = {
           avatar: message.user.avatar,
           count: 1
-        }
+        };
       }
       return acc;
     }, {});
     this.props.setUserPosts(userPosts);
-  }
+  };
 
   displayMessages = messages =>
     messages.length > 0 &&
@@ -157,7 +166,9 @@ class Messages extends Component {
       />
     ));
 
-  displayChannelName = channel => (channel ? `#${channel.name}` : '');
+  displayChannelName = channel => {
+    return channel ? `${this.state.privateChannel ? '@' : '#'}${channel.name}` : '';
+  };
 
   render() {
     const {
@@ -169,7 +180,8 @@ class Messages extends Component {
       searchTerm,
       searchResults,
       searchLoading,
-      isChannelStarred
+      isChannelStarred,
+      privateChannel
     } = this.state;
 
     return (
@@ -181,6 +193,7 @@ class Messages extends Component {
           searchLoading={searchLoading}
           handleStar={this.handleStar}
           isChannelStarred={isChannelStarred}
+          isPrivateChannel={privateChannel}
         />
 
         <Segment className='messages'>
@@ -195,10 +208,16 @@ class Messages extends Component {
           messagesRef={messagesRef}
           currentChannel={channel}
           currentUser={user}
+          isPrivateChannel={privateChannel}
+          getMessagesRef={this.getMessagesRef}
+
         />
       </React.Fragment>
     );
   }
 }
 
-export default connect(null, { setUserPosts })(Messages);
+export default connect(
+  null,
+  { setUserPosts }
+)(Messages);

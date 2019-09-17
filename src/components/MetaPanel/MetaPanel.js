@@ -11,6 +11,7 @@ import {
 class MetaPanel extends Component {
   state = {
     channel: this.props.currentChannel,
+    privateChannel: this.props.isPrivateChannel,
     activeIndex: 0
   };
 
@@ -29,10 +30,10 @@ class MetaPanel extends Component {
     Object.entries(posts)
       .sort((a, b) => b[1] - a[1])
       .map(([key, val], i) => (
-        <List.Item key={i} className="post-item">
+        <List.Item key={i} className='post-item'>
           <Image avatar src={val.avatar} />
           <List.Content>
-            <List.Header as="a">{key}</List.Header>
+            <List.Header as='a'>{key}</List.Header>
             <List.Description>{this.formatCount(val.count)}</List.Description>
           </List.Content>
         </List.Item>
@@ -40,22 +41,24 @@ class MetaPanel extends Component {
       .slice(0, 5);
 
   render() {
-    const { activeIndex, channel } = this.state;
+    const { activeIndex, channel, privateChannel } = this.state;
     const { userPosts } = this.props;
+
+    if (privateChannel) return null;
 
     return (
       <Segment loading={!channel}>
-        <Header as="h3" attached="top">
+        <Header as='h3' attached='top'>
           About # {channel && channel.name}
         </Header>
-        <Accordion styled attached="true">
+        <Accordion styled attached='true'>
           <Accordion.Title
             active={activeIndex === 0}
             index={0}
             onClick={this.setActiveIndex}
           >
-            <Icon name="dropdown" />
-            <Icon name="info" />
+            <Icon name='dropdown' />
+            <Icon name='info' />
             Channel Details
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 0}>
@@ -67,8 +70,8 @@ class MetaPanel extends Component {
             index={1}
             onClick={this.setActiveIndex}
           >
-            <Icon name="dropdown" />
-            <Icon name="user circle" />
+            <Icon name='dropdown' />
+            <Icon name='user circle' />
             Top Posters
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 1}>
@@ -80,12 +83,12 @@ class MetaPanel extends Component {
             index={2}
             onClick={this.setActiveIndex}
           >
-            <Icon name="dropdown" />
-            <Icon name="pencil alternate" />
+            <Icon name='dropdown' />
+            <Icon name='pencil alternate' />
             Created By
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 2}>
-            <Header as="h3">
+            <Header as='h3'>
               <Image circular src={channel && channel.createdBy.avatar} />
               {channel && channel.createdBy.name}
             </Header>

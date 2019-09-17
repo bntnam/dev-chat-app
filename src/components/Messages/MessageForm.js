@@ -54,12 +54,12 @@ class MessageForm extends Component {
   };
 
   sendMessage = () => {
-    const { messagesRef } = this.props;
+    const { getMessagesRef } = this.props;
     const { message, channel } = this.state;
 
     if (message) {
       this.setState({ loading: true });
-      messagesRef
+      getMessagesRef()
         .child(channel.id)
         .push()
         .set(this.createMessage())
@@ -80,10 +80,18 @@ class MessageForm extends Component {
     }
   };
 
+  getPath = () => {
+    if (this.props.isPrivateChannel) {
+      return `chat/private-${this.state.channel.id}`;
+    } else {
+      return 'chat/public';
+    }
+  };
+
   uploadFile = (file, metadata) => {
     const pathToUpload = this.state.channel.id;
-    const ref = this.props.messagesRef;
-    const filePath = `chat/public/${uuidv4()}.jpg`;
+    const ref = this.props.getMessagesRef();
+    const filePath = `${this.getPath()}/${uuidv4()}.jpg`;
 
     this.setState(
       {
@@ -154,36 +162,38 @@ class MessageForm extends Component {
     } = this.state;
 
     return (
-      <Segment className="message__form">
+      <Segment className='message__form'>
         <Input
           fluid
-          name="message"
+          name='message'
           onChange={this.handleChange}
           value={message}
           style={{ marginBottom: '0.7em' }}
-          labelPosition="left"
+          label={<Button icon={'add'} />}
+          labelPosition='left'
           className={
             errors.some(error => error.message.includes('message'))
               ? 'error'
               : ''
           }
-          placeholder="Write your message"
+          placeholder='Write your message'
         />
-        <Button.Group icon widths="2">
+        <Button.Group icon widths='2'>
           <Button
             onClick={this.sendMessage}
             disabled={loading}
-            color="orange"
-            content="Add Reply"
-            labelPosition="left"
-            icon="edit"
+            color='orange'
+            content='Add Reply'
+            labelPosition='left'
+            icon='edit'
           />
           <Button
-            color="teal"
+            color='teal'
+            disabled={uploadState === 'uploading'}
             onClick={this.openModal}
-            content="Upload Media"
-            labelPosition="right"
-            icon="cloud upload"
+            content='Upload Media'
+            labelPosition='right'
+            icon='cloud upload'
           />
         </Button.Group>
         <FileModal
@@ -191,7 +201,10 @@ class MessageForm extends Component {
           closeModal={this.closeModal}
           uploadFile={this.uploadFile}
         />
-        <ProgressBar uploadState={uploadState} percentUploaded={percentUploaded} />
+        <ProgressBar
+          uploadState={uploadState}
+          percentUploaded={percentUploaded}
+        />
       </Segment>
     );
   }

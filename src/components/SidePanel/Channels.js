@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Modal, Form, Input, Button } from 'semantic-ui-react';
-import firebase from '../../firebase';
 import { connect } from 'react-redux';
-import { setCurrentChannel } from '../../actions';
+
+import firebase from '../../firebase';
+import { setCurrentChannel, setPrivateChannel } from '../../actions';
 
 class Channels extends Component {
   state = {
@@ -36,15 +37,6 @@ class Channels extends Component {
     this.state.channelsRef.off();
   }
 
-  setFirstChannel = () => {
-    const firstChannel = this.state.channels[0];
-    if (this.state.firstLoad && this.state.channels.length > 0) {
-      this.props.setCurrentChannel(firstChannel);
-      this.setActiveChannel(firstChannel);
-    }
-    this.setState({ firstLoad: false });
-  }
-
   addChannel = () => {
     const { channelsRef, channelName, channelDetails, user } = this.state;
 
@@ -73,6 +65,9 @@ class Channels extends Component {
       });
   };
 
+  isFormValid = ({ channelName, channelDetails }) =>
+    channelName && channelDetails;
+
   handleSubmit = e => {
     e.preventDefault();
     if (this.isFormValid(this.state)) {
@@ -84,14 +79,24 @@ class Channels extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  changeChannel = channel => {
-    this.setActiveChannel(channel);
-    this.props.setCurrentChannel(channel);
-  };
-
   setActiveChannel = channel => {
     this.setState({ activeChannel: channel.id });
   }
+
+  setFirstChannel = () => {
+    const firstChannel = this.state.channels[0];
+    if (this.state.firstLoad && this.state.channels.length > 0) {
+      this.props.setCurrentChannel(firstChannel);
+      this.setActiveChannel(firstChannel);
+    }
+    this.setState({ firstLoad: false });
+  }
+
+  changeChannel = channel => {
+    this.setActiveChannel(channel);
+    this.props.setCurrentChannel(channel);
+    this.props.setPrivateChannel(channel);
+  };
 
   displayChannels = channels =>
     channels.length > 0 &&
@@ -107,9 +112,6 @@ class Channels extends Component {
       </Menu.Item>
     ));
 
-  isFormValid = ({ channelName, channelDetails }) =>
-    channelName && channelDetails;
-
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => this.setState({ modal: false });
@@ -119,7 +121,7 @@ class Channels extends Component {
 
     return (
       <React.Fragment>
-        <Menu.Menu style={{ paddingBottom: '2em' }}>
+        <Menu.Menu className="menu">
           <Menu.Item>
             <span>
               <Icon name="exchange" /> CHANNELS
@@ -168,5 +170,5 @@ class Channels extends Component {
 
 export default connect(
   null,
-  { setCurrentChannel }
+  { setCurrentChannel, setPrivateChannel }
 )(Channels);
