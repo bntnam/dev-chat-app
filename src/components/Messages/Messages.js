@@ -8,6 +8,7 @@ import Message from './Message';
 import { connect } from 'react-redux';
 import { setUserPosts } from '../../actions';
 import Typing from './Typing';
+import Skeleton from './Skeleton';
 
 class Messages extends Component {
   state = {
@@ -46,7 +47,7 @@ class Messages extends Component {
 
   scrollToBottom = () => {
     this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
-  }
+  };
 
   addListeners = channelId => {
     this.addMessageListener(channelId);
@@ -225,11 +226,27 @@ class Messages extends Component {
   displayTypingUsers = users => {
     users.length > 0 &&
       users.map(user => (
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.2em' }} key={user.id}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '0.2em'
+          }}
+          key={user.id}
+        >
           <span className='user__typing'>{user.name} is typing</span> <Typing />
         </div>
       ));
   };
+
+  displayMessageSkeleton = loading =>
+    loading ? (
+      <React.Fragment>
+        {[...Array(10)].map((_, i) => (
+          <Skeleton key={i} />
+        ))}
+      </React.Fragment>
+    ) : null;
 
   render() {
     const {
@@ -243,7 +260,8 @@ class Messages extends Component {
       searchLoading,
       privateChannel,
       isChannelStarred,
-      typingUsers
+      typingUsers,
+      messagesLoading
     } = this.state;
 
     return (
@@ -260,6 +278,7 @@ class Messages extends Component {
 
         <Segment className='messages'>
           <Comment.Group>
+            {this.displayMessageSkeleton(messagesLoading)}
             {searchTerm
               ? this.displayMessages(searchResults)
               : this.displayMessages(messages)}
