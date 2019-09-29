@@ -2,7 +2,7 @@
 <img class="img-fluid mb-5" src="https://bntnam.github.io/img/portfolio/dev-chat.png" alt="">
 <h3>1. Introduction</h3>
 <p>- DevChat: A react slack clone web chat application for developers.</p>
-<p>- Website: <a href="https://dev-chat-c52e5.firebaseapp.com/" target="_blank">https://dev-chat-c52e5.firebaseapp.com</a></p>
+<p>- Website: <a href="https://bntn-devchat.firebaseapp.com/" target="_blank">https://bntn-devchat.firebaseapp.com</a></p>
 <p>- Source Code: <a href="https://github.com/bntnam/dev-chat" target="_blank">https://github.com/bntnam/dev-chat</a></p>
 <h3>2. Technologies</h3>
 <ul>
