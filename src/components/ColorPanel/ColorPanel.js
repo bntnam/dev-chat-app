@@ -59,7 +59,7 @@ class ColorPanel extends React.Component {
       })
       .then(() => {
         console.log('Colors added');
-        this.closeModal;
+        this.closeModal();
       })
       .catch(err => console.error(err));
   };
