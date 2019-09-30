@@ -23,3 +23,5 @@ yarn-error.log*
 **/.firebaserc
 
 .env
+database.rules.json
+storage.rules
