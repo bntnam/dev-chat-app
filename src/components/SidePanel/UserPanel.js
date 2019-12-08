@@ -18,12 +18,9 @@ class UserPanel extends Component {
       disabled: true
     },
     {
-      key: 'avatar',
-      text: <span>Change Avatar</span>
-    },
-    {
       key: 'signout',
-      text: <span onClick={this.handleSignout}>Sign Out</span>
+      text: <span>Sign Out</span>,
+      onClick: this.handleSignout
     }
   ];
 
