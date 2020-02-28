@@ -1,13 +1,13 @@
-import React from 'react';
-import { Comment, Image } from 'semantic-ui-react';
-import moment from 'moment';
+import React from "react";
+import { Comment, Image } from "semantic-ui-react";
+import moment from "moment";
 
 const isOwnMessage = (message, user) => {
-  return message.user.id === user.uid ? 'message__self' : '';
+  return message.user.id === user.uid ? "message__self" : "";
 };
 
 const isImage = message => {
-  return message.hasOwnProperty('image') && !message.hasOwnProperty('content');
+  return message.hasOwnProperty("image") && !message.hasOwnProperty("content");
 };
 
 const timeFromNow = timestamp => moment(timestamp).fromNow();

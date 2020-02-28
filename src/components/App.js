@@ -1,13 +1,13 @@
-import React from 'react';
-import { Grid } from 'semantic-ui-react';
-import './App.css';
-import { connect } from 'react-redux';
-import SidePanel from './SidePanel/SidePanel';
-import Messages from './Messages/Messages';
-import MetaPanel from './MetaPanel/MetaPanel';
+import React from "react";
+import { Grid } from "semantic-ui-react";
+import "./App.css";
+import { connect } from "react-redux";
+import SidePanel from "./SidePanel/SidePanel";
+import Messages from "./Messages/Messages";
+import MetaPanel from "./MetaPanel/MetaPanel";
 
 const App = ({ currentUser, currentChannel, userPosts }) => (
-  <Grid columns="equal" className="app" style={{ background: '#eee' }}>
+  <Grid columns="equal" className="app" style={{ background: "#eee" }}>
     <SidePanel key={currentUser && currentUser.uid} currentUser={currentUser} />
 
     <Grid.Column style={{ marginLeft: 270 }}>

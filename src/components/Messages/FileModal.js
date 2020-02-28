@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import mime from 'mime-types';
-import { Modal, Input, Button, Icon } from 'semantic-ui-react';
+import React, { Component } from "react";
+import mime from "mime-types";
+import { Modal, Input, Button, Icon } from "semantic-ui-react";
 
 class FileModal extends Component {
   state = {
     file: null,
-    authorized: ['image/jpeg', 'image/png']
+    authorized: ["image/jpeg", "image/png"]
   };
 
   addFile = e => {
@@ -31,7 +31,7 @@ class FileModal extends Component {
 
   isAuthorized = filename =>
     this.state.authorized.includes(mime.lookup(filename));
-  
+
   clearFile = () => this.setState({ file: null });
 
   render() {

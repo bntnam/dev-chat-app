@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Header, Segment, Input, Icon } from 'semantic-ui-react';
+import React, { Component } from "react";
+import { Header, Segment, Input, Icon } from "semantic-ui-react";
 
 class MessagesHeader extends Component {
   render() {
@@ -19,8 +19,8 @@ class MessagesHeader extends Component {
             {channelName}
             <Icon
               onClick={handleStar}
-              name={isChannelStarred ? 'star' : 'star outline'}
-              color={isChannelStarred ? 'yellow' : 'black'}
+              name={isChannelStarred ? "star" : "star outline"}
+              color={isChannelStarred ? "yellow" : "black"}
             />
           </span>
           <Header.Subheader>{numUniqueUsers}</Header.Subheader>

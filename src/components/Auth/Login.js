@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Grid,
   Form,
@@ -7,16 +7,16 @@ import {
   Header,
   Message,
   Icon
-} from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import firebase from '../../firebase';
+} from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import firebase from "../../firebase";
 
 class Login extends Component {
   state = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     errors: [],
-    loading: false,
+    loading: false
   };
 
   displayErrors = errors =>
@@ -41,8 +41,8 @@ class Login extends Component {
           this.setState({
             errors: this.state.errors.concat(err),
             loading: false
-          })
-        })
+          });
+        });
     }
   };
 
@@ -50,17 +50,12 @@ class Login extends Component {
 
   handleInputError = (errors, inputName) => {
     return errors.some(error => error.message.toLowerCase().includes(inputName))
-      ? 'error'
-      : '';
+      ? "error"
+      : "";
   };
 
   render() {
-    const {
-      email,
-      password,
-      errors,
-      loading
-    } = this.state;
+    const { email, password, errors, loading } = this.state;
 
     return (
       <Grid textAlign="center" verticalAlign="middle" className="app">
@@ -79,7 +74,7 @@ class Login extends Component {
                 placeholder="Email Address"
                 onChange={this.handleChange}
                 value={email}
-                className={this.handleInputError(errors, 'email')}
+                className={this.handleInputError(errors, "email")}
                 type="email"
               />
               <Form.Input
@@ -90,11 +85,11 @@ class Login extends Component {
                 placeholder="Password"
                 onChange={this.handleChange}
                 value={password}
-                className={this.handleInputError(errors, 'password')}
+                className={this.handleInputError(errors, "password")}
                 type="password"
               />
               <Button
-                className={loading ? 'loading' : ''}
+                className={loading ? "loading" : ""}
                 color="violet"
                 fluid
                 size="large"

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Grid,
   Form,
@@ -7,20 +7,20 @@ import {
   Header,
   Message,
   Icon
-} from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import firebase from '../../firebase';
-import md5 from 'md5';
+} from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import firebase from "../../firebase";
+import md5 from "md5";
 
 class Register extends Component {
   state = {
-    username: '',
-    email: '',
-    password: '',
-    passwordConfirmation: '',
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
     errors: [],
     loading: false,
-    userRef: firebase.database().ref('users')
+    userRef: firebase.database().ref("users")
   };
 
   isFormValid = () => {
@@ -28,11 +28,11 @@ class Register extends Component {
     let error;
 
     if (this.isFormEmpty(this.state)) {
-      error = { message: 'Fill in all fields ' };
+      error = { message: "Fill in all fields " };
       this.setState({ errors: errors.concat(error) });
       return false;
     } else if (!this.isPasswordValid(this.state)) {
-      error = { message: 'Password is invalid' };
+      error = { message: "Password is invalid" };
       this.setState({ errors: errors.concat(error) });
       return false;
     } else {
@@ -84,8 +84,8 @@ class Register extends Component {
             })
             .then(() => {
               this.saveUser(createdUser).then(() => {
-                console.log('user saved');
-              })
+                console.log("user saved");
+              });
             })
             .catch(err => {
               console.log(err);
@@ -109,13 +109,13 @@ class Register extends Component {
     return this.state.userRef.child(createdUser.user.uid).set({
       name: createdUser.user.displayName,
       avatar: createdUser.user.photoURL
-    })
-  }
+    });
+  };
 
   handleInputError = (errors, inputName) => {
     return errors.some(error => error.message.toLowerCase().includes(inputName))
-      ? 'error'
-      : '';
+      ? "error"
+      : "";
   };
 
   render() {
@@ -155,7 +155,7 @@ class Register extends Component {
                 placeholder="Email Address"
                 onChange={this.handleChange}
                 value={email}
-                className={this.handleInputError(errors, 'email')}
+                className={this.handleInputError(errors, "email")}
                 type="email"
               />
               <Form.Input
@@ -166,7 +166,7 @@ class Register extends Component {
                 placeholder="Password"
                 onChange={this.handleChange}
                 value={password}
-                className={this.handleInputError(errors, 'password')}
+                className={this.handleInputError(errors, "password")}
                 type="password"
               />
               <Form.Input
@@ -177,11 +177,11 @@ class Register extends Component {
                 placeholder="Password Confirmation"
                 onChange={this.handleChange}
                 value={passwordConfirmation}
-                className={this.handleInputError(errors, 'password')}
+                className={this.handleInputError(errors, "password")}
                 type="password"
               />
               <Button
-                className={loading ? 'loading' : ''}
+                className={loading ? "loading" : ""}
                 color="orange"
                 fluid
                 size="large"
