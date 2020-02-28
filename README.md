@@ -17,10 +17,13 @@
 
 ### 3. Features:
 
-- Sign up / Login.
-- Create a channel.
-- Send text messages.
-- Send media files.
-- Search messages.
-- Star to favorite / unfavorite channels.
-- Display progress bar.
+- Signing up / Logging in.
+- Changing an avatar.
+- Creating a channel.
+- Sending text messages.
+- Picking emojis.
+- Uploading media files.
+- Searching messages.
+- Starring to favorite / unfavorite channels.
+- Displaying progress bar.
+- Skeleton loading.
