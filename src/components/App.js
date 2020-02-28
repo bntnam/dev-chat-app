@@ -31,7 +31,7 @@ const App = ({ currentUser, currentChannel, userPosts }) => (
 const mapStateToProps = state => ({
   currentUser: state.user.currentUser,
   currentChannel: state.channel.currentChannel,
-  userPosts: state.channel.userPosts
+  userPosts: state.channel.userPosts,
 });
 
 export default connect(mapStateToProps)(App);

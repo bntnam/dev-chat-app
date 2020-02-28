@@ -16,7 +16,7 @@ class MessageForm extends Component {
     user: this.props.currentUser,
     loading: false,
     errors: [],
-    modal: false
+    modal: false,
   };
 
   componentWillUnmount() {
@@ -40,8 +40,8 @@ class MessageForm extends Component {
       user: {
         id: this.state.user.uid,
         name: this.state.user.displayName,
-        avatar: this.state.user.photoURL
-      }
+        avatar: this.state.user.photoURL,
+      },
     };
 
     if (fileUrl !== null) {
@@ -70,12 +70,12 @@ class MessageForm extends Component {
           console.log(err);
           this.setState({
             loading: false,
-            errors: this.state.errors.concat(err)
+            errors: this.state.errors.concat(err),
           });
         });
     } else {
       this.setState({
-        errors: this.state.errors.concat({ message: "Add a message" })
+        errors: this.state.errors.concat({ message: "Add a message" }),
       });
     }
   };
@@ -88,7 +88,7 @@ class MessageForm extends Component {
     this.setState(
       {
         uploadState: "uploading",
-        uploadTask: this.state.storageRef.child(filePath).put(file, metadata)
+        uploadTask: this.state.storageRef.child(filePath).put(file, metadata),
       },
       () => {
         this.state.uploadTask.on(
@@ -104,7 +104,7 @@ class MessageForm extends Component {
             this.setState({
               errors: this.state.errors.concat(err),
               uploadState: "error",
-              uploadTask: null
+              uploadTask: null,
             });
           },
           () => {
@@ -118,7 +118,7 @@ class MessageForm extends Component {
                 this.setState({
                   errors: this.state.errors.concat(err),
                   uploadState: "error",
-                  uploadTask: null
+                  uploadTask: null,
                 });
               });
           }
@@ -138,7 +138,7 @@ class MessageForm extends Component {
       .catch(err => {
         console.error(err);
         this.setState({
-          errors: this.state.errors.concat(err)
+          errors: this.state.errors.concat(err),
         });
       });
   };
@@ -150,7 +150,7 @@ class MessageForm extends Component {
       loading,
       modal,
       uploadState,
-      percentUploaded
+      percentUploaded,
     } = this.state;
 
     return (

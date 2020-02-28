@@ -19,7 +19,7 @@ class Messages extends Component {
     numUniqueUsers: "",
     searchTerm: "",
     searchLoading: false,
-    searchResults: []
+    searchResults: [],
   };
 
   componentDidMount() {
@@ -41,7 +41,7 @@ class Messages extends Component {
       loadedMessages.push(snap.val());
       this.setState({
         messages: loadedMessages,
-        messagesLoading: false
+        messagesLoading: false,
       });
       this.countUniqueUsers(loadedMessages);
       this.countUserPosts(loadedMessages);
@@ -65,7 +65,7 @@ class Messages extends Component {
   handleStar = () => {
     this.setState(
       prevState => ({
-        isChannelStarred: !prevState.isChannelStarred
+        isChannelStarred: !prevState.isChannelStarred,
       }),
       () => this.starChannel()
     );
@@ -79,9 +79,9 @@ class Messages extends Component {
           details: this.state.channel.details,
           createdBy: {
             name: this.state.channel.createdBy.name,
-            avatar: this.state.channel.createdBy.avatar
-          }
-        }
+            avatar: this.state.channel.createdBy.avatar,
+          },
+        },
       });
     } else {
       this.state.usersRef
@@ -99,7 +99,7 @@ class Messages extends Component {
     this.setState(
       {
         searchTerm: e.target.value,
-        searchLoading: true
+        searchLoading: true,
       },
       () => this.handleSearchMessages()
     );
@@ -140,7 +140,7 @@ class Messages extends Component {
       } else {
         acc[message.user.name] = {
           avatar: message.user.avatar,
-          count: 1
+          count: 1,
         };
       }
       return acc;
@@ -170,7 +170,7 @@ class Messages extends Component {
       searchTerm,
       searchResults,
       searchLoading,
-      isChannelStarred
+      isChannelStarred,
     } = this.state;
 
     return (
