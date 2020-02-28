@@ -37,6 +37,12 @@ class MessageForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleKeyDown = event => {
+    if (event.keyCode === 13) {
+      this.sendMessage();
+    }
+  }
+
   handleTogglePicker = () => {
     this.setState({ emojiPicker: !this.state.emojiPicker });
   };
@@ -198,6 +204,7 @@ class MessageForm extends Component {
           fluid
           name="message"
           onChange={this.handleChange}
+          onKeyDown={this.handleKeyDown}
           value={message}
           ref={node => (this.messageInputRef = node)}
           style={{ marginBottom: "0.7em" }}
