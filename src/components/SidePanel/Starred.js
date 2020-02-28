@@ -9,7 +9,7 @@ class Starred extends Component {
     user: this.props.currentUser,
     usersRef: firebase.database().ref("users"),
     activeChannel: "",
-    starredChannels: []
+    starredChannels: [],
   };
 
   componentDidMount() {
@@ -33,7 +33,7 @@ class Starred extends Component {
       .on("child_added", snap => {
         const starredChannel = { id: snap.key, ...snap.val() };
         this.setState({
-          starredChannels: [...this.state.starredChannels, starredChannel]
+          starredChannels: [...this.state.starredChannels, starredChannel],
         });
       });
     this.state.usersRef

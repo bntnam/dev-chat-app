@@ -7,7 +7,7 @@ import {
   Image,
   Modal,
   Input,
-  Button
+  Button,
 } from "semantic-ui-react";
 import AvatarEditor from "react-avatar-editor";
 import firebase from "../../firebase";
@@ -24,8 +24,8 @@ class UserPanel extends Component {
     userRef: firebase.auth().currentUser,
     usersRef: firebase.database().ref("users"),
     metadata: {
-      contentType: "image/jpeg"
-    }
+      contentType: "image/jpeg",
+    },
   };
 
   openModal = () => this.setState({ modal: true });
@@ -40,18 +40,18 @@ class UserPanel extends Component {
           Signed in as <strong>{this.state.user.displayName}</strong>
         </span>
       ),
-      disabled: true
+      disabled: true,
     },
     {
       key: "avatar",
       text: <span>Change Avatar</span>,
-      onClick: this.openModal
+      onClick: this.openModal,
     },
     {
       key: "signout",
       text: <span>Sign Out</span>,
-      onClick: this.handleSignout
-    }
+      onClick: this.handleSignout,
+    },
   ];
 
   uploadCroppedImage = () => {
@@ -74,7 +74,7 @@ class UserPanel extends Component {
 
     userRef
       .updateProfile({
-        photoURL: this.state.uploadedCroppedImage
+        photoURL: this.state.uploadedCroppedImage,
       })
       .then(() => {
         console.log("PhotoURL updated");
@@ -113,7 +113,7 @@ class UserPanel extends Component {
         let imageUrl = URL.createObjectURL(blob);
         this.setState({
           croppedImage: imageUrl,
-          blob
+          blob,
         });
       });
     }

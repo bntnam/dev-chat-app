@@ -6,7 +6,7 @@ import {
   Button,
   Header,
   Message,
-  Icon
+  Icon,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import firebase from "../../firebase";
@@ -16,7 +16,7 @@ class Login extends Component {
     email: "",
     password: "",
     errors: [],
-    loading: false
+    loading: false,
   };
 
   displayErrors = errors =>
@@ -40,7 +40,7 @@ class Login extends Component {
           console.log(err);
           this.setState({
             errors: this.state.errors.concat(err),
-            loading: false
+            loading: false,
           });
         });
     }

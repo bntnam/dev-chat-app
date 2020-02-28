@@ -6,7 +6,7 @@ import {
   Button,
   Header,
   Message,
-  Icon
+  Icon,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import firebase from "../../firebase";
@@ -20,7 +20,7 @@ class Register extends Component {
     passwordConfirmation: "",
     errors: [],
     loading: false,
-    userRef: firebase.database().ref("users")
+    userRef: firebase.database().ref("users"),
   };
 
   isFormValid = () => {
@@ -80,7 +80,7 @@ class Register extends Component {
               displayName: this.state.username,
               photoURL: `http://gravatar.com/avatar/${md5(
                 createdUser.user.email
-              )}?d=identicon`
+              )}?d=identicon`,
             })
             .then(() => {
               this.saveUser(createdUser).then(() => {
@@ -91,7 +91,7 @@ class Register extends Component {
               console.log(err);
               this.setState({
                 errors: this.state.errors.concat(err),
-                loading: false
+                loading: false,
               });
             });
         })
@@ -99,7 +99,7 @@ class Register extends Component {
           console.log(err);
           this.setState({
             errors: this.state.errors.concat(err),
-            loading: false
+            loading: false,
           });
         });
     }
@@ -108,7 +108,7 @@ class Register extends Component {
   saveUser = createdUser => {
     return this.state.userRef.child(createdUser.user.uid).set({
       name: createdUser.user.displayName,
-      avatar: createdUser.user.photoURL
+      avatar: createdUser.user.photoURL,
     });
   };
 
@@ -125,7 +125,7 @@ class Register extends Component {
       password,
       passwordConfirmation,
       errors,
-      loading
+      loading,
     } = this.state;
 
     return (

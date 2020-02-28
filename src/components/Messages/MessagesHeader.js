@@ -9,7 +9,7 @@ class MessagesHeader extends Component {
       handleSearchChange,
       searchLoading,
       handleStar,
-      isChannelStarred
+      isChannelStarred,
     } = this.props;
 
     return (

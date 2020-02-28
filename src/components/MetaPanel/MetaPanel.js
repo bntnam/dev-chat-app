@@ -5,13 +5,13 @@ import {
   Header,
   Icon,
   Image,
-  List
+  List,
 } from "semantic-ui-react";
 
 class MetaPanel extends Component {
   state = {
     channel: this.props.currentChannel,
-    activeIndex: 0
+    activeIndex: 0,
   };
 
   setActiveIndex = (e, titleProps) => {
@@ -19,7 +19,7 @@ class MetaPanel extends Component {
     const { activeIndex } = this.state;
     const newIndex = activeIndex === index ? -1 : index;
     this.setState({
-      activeIndex: newIndex
+      activeIndex: newIndex,
     });
   };
 
