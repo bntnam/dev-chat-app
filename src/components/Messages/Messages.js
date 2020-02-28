@@ -21,22 +21,47 @@ class Messages extends Component {
     searchTerm: "",
     searchLoading: false,
     searchResults: [],
+    listeners: [],
   };
 
   componentDidMount() {
-    const { channel, user } = this.state;
+    const { channel, user, listeners } = this.state;
 
     if (channel && user) {
+      this.removeListeners(listeners);
       this.addListeners(channel.id);
       this.addUserStarsListener(channel.id, user.uid);
     }
   }
+
+  componentWillUnmount() {
+    this.removeListeners(this.state.listeners);
+  }
+
+  removeListeners = listeners => {
+    listeners.forEach(listener => {
+      listener.ref.child(listener.id).off(listener.event);
+    });
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (this.messagesEnd) {
       this.scrollToBottom();
     }
   }
+
+  addToListeners = (id, ref, event) => {
+    const index = this.state.listeners.findIndex(listener => {
+      return (
+        listener.id === id && listener.ref === ref && listener.event === event
+      );
+    });
+
+    if (index === -1) {
+      const newListener = { id, ref, event };
+      this.setState({ listeners: this.state.listeners.concat(newListener) });
+    }
+  };
 
   scrollToBottom = () => {
     this.messagesEnd.scrollIntoView({ behavior: "smooth" });
@@ -57,6 +82,7 @@ class Messages extends Component {
       this.countUniqueUsers(loadedMessages);
       this.countUserPosts(loadedMessages);
     });
+    this.addToListeners(channelId, this.state.messagesRef, "child_added");
   };
 
   addUserStarsListener = (channelId, userId) => {
