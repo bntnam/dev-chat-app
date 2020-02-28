@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { Menu, Icon, Modal, Form, Input, Button } from 'semantic-ui-react';
-import firebase from '../../firebase';
-import { connect } from 'react-redux';
-import { setCurrentChannel } from '../../actions';
+import React, { Component } from "react";
+import { Menu, Icon, Modal, Form, Input, Button } from "semantic-ui-react";
+import firebase from "../../firebase";
+import { connect } from "react-redux";
+import { setCurrentChannel } from "../../actions";
 
 class Channels extends Component {
   state = {
     user: this.props.currentUser,
     channels: [],
-    channelName: '',
-    channelDetails: '',
-    channelsRef: firebase.database().ref('channels'),
+    channelName: "",
+    channelDetails: "",
+    channelsRef: firebase.database().ref("channels"),
     modal: false,
     firstLoad: true,
-    activeChannel: ''
+    activeChannel: ""
   };
 
   componentDidMount() {
@@ -26,7 +26,7 @@ class Channels extends Component {
 
   addListeners = () => {
     let loadedChannels = [];
-    this.state.channelsRef.on('child_added', snap => {
+    this.state.channelsRef.on("child_added", snap => {
       loadedChannels.push(snap.val());
       this.setState({ channels: loadedChannels }, () => this.setFirstChannel());
     });
@@ -34,7 +34,7 @@ class Channels extends Component {
 
   removeListeners = () => {
     this.state.channelsRef.off();
-  }
+  };
 
   setFirstChannel = () => {
     const firstChannel = this.state.channels[0];
@@ -43,7 +43,7 @@ class Channels extends Component {
       this.setActiveChannel(firstChannel);
     }
     this.setState({ firstLoad: false });
-  }
+  };
 
   addChannel = () => {
     const { channelsRef, channelName, channelDetails, user } = this.state;
@@ -64,9 +64,9 @@ class Channels extends Component {
       .child(key)
       .update(newChannel)
       .then(() => {
-        this.setState({ channelName: '', channelDetails: '' });
+        this.setState({ channelName: "", channelDetails: "" });
         this.closeModal();
-        console.log('channel added');
+        console.log("channel added");
       })
       .catch(err => {
         console.log(err);
@@ -91,7 +91,7 @@ class Channels extends Component {
 
   setActiveChannel = channel => {
     this.setState({ activeChannel: channel.id });
-  }
+  };
 
   displayChannels = channels =>
     channels.length > 0 &&
@@ -119,11 +119,11 @@ class Channels extends Component {
 
     return (
       <React.Fragment>
-        <Menu.Menu style={{ paddingBottom: '2em' }}>
+        <Menu.Menu style={{ paddingBottom: "2em" }}>
           <Menu.Item>
             <span>
               <Icon name="exchange" /> CHANNELS
-            </span>{' '}
+            </span>{" "}
             ({channels.length}) <Icon name="add" onClick={this.openModal} />
           </Menu.Item>
           {this.displayChannels(channels)}
@@ -166,7 +166,4 @@ class Channels extends Component {
   }
 }
 
-export default connect(
-  null,
-  { setCurrentChannel }
-)(Channels);
+export default connect(null, { setCurrentChannel })(Channels);

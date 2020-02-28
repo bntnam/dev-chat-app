@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import firebase from '../../firebase';
-import { connect } from 'react-redux';
-import { setCurrentChannel } from '../../actions';
-import { Menu, Icon } from 'semantic-ui-react';
+import React, { Component } from "react";
+import firebase from "../../firebase";
+import { connect } from "react-redux";
+import { setCurrentChannel } from "../../actions";
+import { Menu, Icon } from "semantic-ui-react";
 
 class Starred extends Component {
   state = {
     user: this.props.currentUser,
-    usersRef: firebase.database().ref('users'),
-    activeChannel: '',
+    usersRef: firebase.database().ref("users"),
+    activeChannel: "",
     starredChannels: []
   };
 
@@ -24,13 +24,13 @@ class Starred extends Component {
 
   removeListener = () => {
     this.state.usersRef.child(`${this.state.user.uid}/starred`).off();
-  }
+  };
 
   addListeners = userId => {
     this.state.usersRef
       .child(userId)
-      .child('starred')
-      .on('child_added', snap => {
+      .child("starred")
+      .on("child_added", snap => {
         const starredChannel = { id: snap.key, ...snap.val() };
         this.setState({
           starredChannels: [...this.state.starredChannels, starredChannel]
@@ -38,8 +38,8 @@ class Starred extends Component {
       });
     this.state.usersRef
       .child(userId)
-      .child('starred')
-      .on('child_removed', snap => {
+      .child("starred")
+      .on("child_removed", snap => {
         const channelToRemove = { id: snap.key, ...snap.val() };
         const filteredChannels = this.state.starredChannels.filter(channel => {
           return channel.id !== channelToRemove.id;
@@ -75,11 +75,11 @@ class Starred extends Component {
     const { starredChannels } = this.state;
 
     return (
-      <Menu.Menu style={{ paddingBottom: '2em' }}>
+      <Menu.Menu style={{ paddingBottom: "2em" }}>
         <Menu.Item>
           <span>
             <Icon name="star" /> STARRED
-          </span>{' '}
+          </span>{" "}
           ({starredChannels.length})
         </Menu.Item>
         {this.displayChannels(starredChannels)}
@@ -88,7 +88,4 @@ class Starred extends Component {
   }
 }
 
-export default connect(
-  null,
-  { setCurrentChannel }
-)(Starred);
+export default connect(null, { setCurrentChannel })(Starred);
