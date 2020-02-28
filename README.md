@@ -9,7 +9,7 @@
 
 ### 2. Technologies
 
-- ES6.
+- JavaScript.
 - React / Redux.
 - Firebase.
 - Semantic UI.
