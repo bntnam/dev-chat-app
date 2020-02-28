@@ -6,6 +6,7 @@ import firebase from "../../firebase";
 import Message from "./Message";
 import { connect } from "react-redux";
 import { setUserPosts } from "../../actions";
+import Skeleton from "./Skeleton";
 
 class Messages extends Component {
   state = {
@@ -170,6 +171,15 @@ class Messages extends Component {
 
   displayChannelName = channel => (channel ? `#${channel.name}` : "");
 
+  displayMessageSkeleton = loading =>
+    loading ? (
+      <React.Fragment>
+        {[...Array(10)].map((_, i) => (
+          <Skeleton key={i} />
+        ))}
+      </React.Fragment>
+    ) : null;
+
   render() {
     const {
       messagesRef,
@@ -181,6 +191,7 @@ class Messages extends Component {
       searchResults,
       searchLoading,
       isChannelStarred,
+      messagesLoading,
     } = this.state;
 
     return (
@@ -196,6 +207,7 @@ class Messages extends Component {
 
         <Segment className="messages">
           <Comment.Group>
+            {this.displayMessageSkeleton(messagesLoading)}
             {searchTerm
               ? this.displayMessages(searchResults)
               : this.displayMessages(messages)}
