@@ -4,8 +4,7 @@
 
 ### 1. Introduction
 
-- Website: <a href="https://bntn-devchat.firebaseapp.com" target="_blank">https://bntn-devchat.firebaseapp.com</a>
-- Source Code: <a href="https://github.com/bntnam/dev-chat-app" target="_blank">https://github.com/bntnam/dev-chat-app</a>
+- Demo: <a href="https://bntn-devchat.firebaseapp.com" target="_blank">https://bntn-devchat.firebaseapp.com</a>
 
 ### 2. Technologies
 
