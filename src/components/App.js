@@ -10,7 +10,7 @@ const App = ({ currentUser, currentChannel, userPosts }) => (
   <Grid columns="equal" className="app" style={{ background: "#eee" }}>
     <SidePanel key={currentUser && currentUser.uid} currentUser={currentUser} />
 
-    <Grid.Column style={{ marginLeft: 270 }}>
+    <Grid.Column style={{ marginLeft: 270 }} className="messages-col">
       <Messages
         key={currentChannel && currentChannel.id}
         currentChannel={currentChannel}
@@ -18,7 +18,7 @@ const App = ({ currentUser, currentChannel, userPosts }) => (
       />
     </Grid.Column>
 
-    <Grid.Column width={4}>
+    <Grid.Column width={4} className="meta-panel-col">
       <MetaPanel
         key={currentChannel && currentChannel.id}
         userPosts={userPosts}

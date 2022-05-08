@@ -111,3 +111,34 @@ body,
   left: 40px;
   right: 20px;
 }
+
+/* Responsive */
+@media (max-width: 968px) {
+  .meta-panel-col {
+    display: none !important;
+  }
+
+  .messages-header-search {
+    display: none !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .side-panel {
+    display: none !important;
+  }
+
+  .messages-col {
+    margin-left: 0 !important;
+  }
+
+  .message__form {
+    margin-left: 0 !important;
+  }
+}
+
+@media (min-height: 1000px) {
+  .messages {
+    height: 72vh;
+  }
+}

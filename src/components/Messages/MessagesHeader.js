@@ -26,7 +26,7 @@ class MessagesHeader extends Component {
           <Header.Subheader>{numUniqueUsers}</Header.Subheader>
         </Header>
 
-        <Header floated="right">
+        <Header floated="right" className="messages-header-search">
           <Input
             loading={searchLoading}
             onChange={handleSearchChange}
