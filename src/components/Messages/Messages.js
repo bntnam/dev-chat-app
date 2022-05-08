@@ -7,6 +7,7 @@ import Message from "./Message";
 import { connect } from "react-redux";
 import { setUserPosts } from "../../actions";
 import Skeleton from "./Skeleton";
+import { formatChannelName } from "../../utils";
 
 class Messages extends Component {
   state = {
@@ -195,7 +196,8 @@ class Messages extends Component {
       />
     ));
 
-  displayChannelName = channel => (channel ? `#${channel.name}` : "");
+  displayChannelName = channel =>
+    channel ? `# ${formatChannelName(channel.name)}` : "";
 
   displayMessageSkeleton = loading =>
     loading ? (

@@ -16,7 +16,7 @@ class MessagesHeader extends Component {
       <Segment clearing>
         <Header fluid="true" as="h2" floated="left" style={{ marginBottom: 0 }}>
           <span>
-            {channelName}
+            {channelName}{" "}
             <Icon
               onClick={handleStar}
               name={isChannelStarred ? "star" : "star outline"}

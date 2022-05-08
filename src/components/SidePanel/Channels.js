@@ -11,6 +11,7 @@ import {
 import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setCurrentChannel } from "../../actions";
+import { formatChannelName } from "../../utils";
 
 class Channels extends Component {
   state = {
@@ -192,7 +193,7 @@ class Channels extends Component {
         {this.getNotificationCount(channel) && (
           <Label color="red">{this.getNotificationCount(channel)}</Label>
         )}
-        # {channel.name}
+        # {formatChannelName(channel.name)}
       </Menu.Item>
     ));
 

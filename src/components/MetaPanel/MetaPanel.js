@@ -7,6 +7,7 @@ import {
   Image,
   List,
 } from "semantic-ui-react";
+import { formatChannelName } from "../../utils";
 
 class MetaPanel extends Component {
   state = {
@@ -46,7 +47,7 @@ class MetaPanel extends Component {
     return (
       <Segment loading={!channel}>
         <Header as="h3" attached="top">
-          About # {channel && channel.name}
+          About # {channel && formatChannelName(channel.name)}
         </Header>
         <Accordion styled attached="true">
           <Accordion.Title

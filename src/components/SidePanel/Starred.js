@@ -3,6 +3,7 @@ import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setCurrentChannel } from "../../actions";
 import { Menu, Icon } from "semantic-ui-react";
+import { formatChannelName } from "../../utils";
 
 class Starred extends Component {
   state = {
@@ -67,7 +68,7 @@ class Starred extends Component {
         style={{ opacity: 0.7 }}
         active={channel.id === this.state.activeChannel}
       >
-        # {channel.name}
+        # {formatChannelName(channel.name)}
       </Menu.Item>
     ));
 
